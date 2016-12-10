@@ -16,7 +16,7 @@ module Make (C : Cstubs.Types.TYPE) = struct
     view ~read ~write:(fun () -> 0) int
 
   let uint_as_int = view ~read:UInt.to_int ~write:UInt.of_int uint
-  let size_t_as_int = view ~read:Size_t.to_int ~write:Size_t.of_int size_t
+  let size_t_as_uint = view ~read:Unsigned.Size_t.to_int ~write:Unsigned.Size_t.of_int size_t
 
   type mdb_env = unit ptr
   let mdb_env : mdb_env typ = ptr (typedef void "MDB_env")
@@ -49,10 +49,10 @@ module Make (C : Cstubs.Types.TYPE) = struct
   let mdb_stat : mdb_stat structure typ = structure "MDB_stat"
   let ms_psize          = field mdb_stat "ms_psize" uint_as_int
   let ms_depth          = field mdb_stat "ms_depth" uint_as_int
-  let ms_branch_pages   = field mdb_stat "ms_branch_pages" size_t_as_int
-  let ms_leaf_pages     = field mdb_stat "ms_leaf_pages" size_t_as_int
-  let ms_overflow_pages = field mdb_stat "ms_overflow_pages" size_t_as_int
-  let ms_entries        = field mdb_stat "ms_entries" size_t_as_int
+  let ms_branch_pages   = field mdb_stat "ms_branch_pages" size_t_as_uint
+  let ms_leaf_pages     = field mdb_stat "ms_leaf_pages" size_t_as_uint
+  let ms_overflow_pages = field mdb_stat "ms_overflow_pages" size_t_as_uint
+  let ms_entries        = field mdb_stat "ms_entries" size_t_as_uint
   let () = seal mdb_stat
 
 

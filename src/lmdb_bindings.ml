@@ -83,7 +83,7 @@ module Make (F: Cstubs.FOREIGN) = struct
 
   (* int mdb_env_set_mapsize(MDB_env *env, size_t size); *)
   let mdb_env_set_mapsize =
-    foreign "mdb_env_set_mapsize" (mdb_env @-> size_t_as_int @-> ret_error)
+    foreign "mdb_env_set_mapsize" (mdb_env @-> size_t_as_uint @-> ret_error)
 
   (* int mdb_env_set_maxreaders(MDB_env *env, unsigned int readers); *)
   let mdb_env_set_maxreaders =
